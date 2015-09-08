@@ -12,4 +12,4 @@ Inspired by the likes of jsFiddle, Code Pen & JS Bin. The difference is with thi
 3. Write/put some html/css/js in the publics folder.
 4. Run 'grunt' in the terminal.
 5. See the result at http://localhost:8001.
-6. When you make a change to your code it's automatically updated, if not run 'grunt' again.
+6. When you make a change to your code it's automatically updated in your browser.

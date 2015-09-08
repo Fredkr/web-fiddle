@@ -14,6 +14,9 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false
                 }
+            },
+            options: {
+                livereload: true
             }
         }
     });
