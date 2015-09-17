@@ -5,6 +5,14 @@ Inspired by the likes of jsFiddle, Code Pen & JS Bin. The difference is with thi
 <br />
 <br />
 
+##### Features
+- Automatically updates browser on any changes to html/css/js
+- SASS -> CSS
+
+##### Requirements
+- Node
+- Grunt
+
 ##### Instructions
 
 1. Clone or download the repo.

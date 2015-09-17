@@ -7,10 +7,17 @@ module.exports = function(grunt) {
                 }
             }
         },
+        sass: {
+            dist: {
+                files: {
+                    'public/css/sass-style.css': 'public/**/*.scss'
+                }
+            }
+        },
         watch: {
             express: {
                 files:  [ 'public/**/*.*' ],
-                tasks:  [ 'express:dev' ],
+                tasks:  [ 'sass', 'express:dev'  ],
                 options: {
                     spawn: false
                 }
@@ -20,7 +27,8 @@ module.exports = function(grunt) {
             }
         }
     });
+    grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.registerTask('default', ['express','watch:express']);
+    grunt.registerTask('default', ['sass', 'express', 'watch:express']);
 };
