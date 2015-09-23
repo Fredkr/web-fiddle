@@ -27,6 +27,6 @@ build/Release
 node_modules
 
 # Local files
-public/css/*
+public/
 !/public/css/style.css
-public/js/*
+!/public/index.html
