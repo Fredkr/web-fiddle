@@ -7,7 +7,8 @@ Inspired by the likes of jsFiddle, Code Pen & JS Bin. The difference is with thi
 
 ##### Features
 - Automatically updates browser on any changes to html/css/js
-- SASS -> CSS
+- SASS -> CSS (autoprefixed with -webkit & -ms)
+- ES2015 -> ES5 compilation
 
 ##### Requirements
 - Node

@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         path: {
-            css: 'dev/sass',
+            css: 'public/css',
+            distcss: 'public/css/dist',
             js: 'public/js',
             distjs: 'public/js/dist',
             concat: '<%=path.distjs%>/concat-script.js'
@@ -16,34 +17,42 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
-                    'public/css/sass-style.css': 'public/**/*.scss'
+                    '<%=path.distcss%>/sass-style.css': '<%=path.css%>/**/*.scss'
                 }
             }
         },
-        concat: {
-            options: {
-                expand: true
-            },
-            js: {
-                src: ['<%=path.js%>/*.js'],
-                dest: '<%=path.concat%>'
-            }
+        postcss: {
+           options: {
+               processors: [
+                   require('autoprefixer')({
+                       browsers: ['last 2 versions']
+                   })
+               ]
+           },
+           dist: {
+               src: '<%=path.distcss%>/*.css'
+           }
         },
-        babel: {
+        browserify:{
             options: {
-                modules: 'common',
-                stage: 0
+                transform:['babelify', 'browserify-shim']
             },
-            dist: {
+            dev:{
+                options:{
+                    browserifyOptions: {
+                        debug: true,
+                        paths: ['<%=path.js%>']
+                    }
+                },
                 files: {
-                    '<%=path.distjs%>/app.js': '<%=path.concat%>'
+                    '<%=path.distjs%>/app.js': '<%=path.js%>/script.js'
                 }
             }
         },
         watch: {
             express: {
-                files:  [ 'public/**/*.*', '!<%=path.distjs%>' ],
-                tasks:  [ 'express:dev' ],
+                files:  ['public/**/*.*', '!<%=path.distjs%>/**/*.*'],
+                tasks:  ['default'],
                 options: {
                     spawn: false
                 }
@@ -55,9 +64,9 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-babel');
-    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.registerTask('default', ['sass', 'concat', 'babel', 'express', 'watch:express']);
+    grunt.registerTask('default', ['sass', 'postcss', 'browserify', 'express', 'watch:express']);
 };

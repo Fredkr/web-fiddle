@@ -28,5 +28,5 @@ node_modules
 
 # Local files
 public/
-!/public/css/style.css
+!/public/css/dist/style.css
 !/public/index.html

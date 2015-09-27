@@ -1,3 +1,0 @@
-var test = () => {
-    alert('test');
-};
